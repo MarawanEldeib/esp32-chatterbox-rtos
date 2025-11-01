@@ -6,7 +6,7 @@ This is a Zephyr RTOS application for ESP32 DevKitC that demonstrates multi-thre
 ## Hardware Requirements
 - ESP32 DevKitC board
 - 3 LEDs (Red, Green, Blue)
-- Appropriate current-limiting resistors
+- Appropriate current-limiting resistors (220Ω - 330Ω)
 - Breadboard and jumper wires
 
 ## Pin Configuration
@@ -19,26 +19,45 @@ This is a Zephyr RTOS application for ESP32 DevKitC that demonstrates multi-thre
 - **Task 2**: Priority 2, Period 4000ms, Execution 2000ms, Release 0ms
 - **Task 3**: Priority 3, Period 6000ms, Execution 1000ms, Release 0ms
 
-## Building
+---
 
-### Prerequisites
-- Zephyr SDK 0.17.0 or later
-- West tool
-- CMake 3.20.0 or later
-- Ninja build system
+## 🚀 Quick Start (Automated Setup)
 
-### Build Commands
-```bash
-# Set up environment
-export ZEPHYR_BASE=/path/to/zephyr
-export ZEPHYR_SDK_INSTALL_DIR=/path/to/zephyr-sdk
+### ⚠️ Important
+This repository contains **ONLY the application code**. You need the complete Zephyr RTOS development environment (~8GB download).
 
-# Build
-west build -p always -b esp32_devkitc/esp32/procpu --sysbuild .
+### Run ONE Command:
 
-# Flash
-west flash
+#### Windows:
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/MarawanEldeib/esp32-chatterbox-rtos/master/setup.ps1" -OutFile "setup.ps1"; .\setup.ps1
 ```
+
+#### macOS/Linux:
+```bash
+curl -O https://raw.githubusercontent.com/MarawanEldeib/esp32-chatterbox-rtos/master/setup.sh && chmod +x setup.sh && ./setup.sh
+```
+
+**The script automatically:**
+- ✅ Installs all tools (Python, CMake, Ninja, Git, etc.)
+- ✅ Downloads Zephyr RTOS (~4GB)
+- ✅ Downloads Zephyr SDK (~1.3GB)
+- ✅ Clones this project
+- ✅ Builds the firmware
+
+**Time:** ~30-45 minutes | **Space:** ~8GB
+
+---
+
+## 📚 Advanced Setup
+
+For manual installation or troubleshooting, see:
+- [Windows Setup Guide](SETUP_WINDOWS.md)
+- [macOS/Linux Setup Guide](SETUP_MACOS_LINUX.md)
+
+---
+
+## Building After Setup
 
 ## Expected Behavior
 - Red LED blinks every 3 seconds (1 second ON)
