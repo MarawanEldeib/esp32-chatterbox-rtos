@@ -1,0 +1,58 @@
+/ {
+    aliases {
+        sw0 = &button;
+    };
+
+    custom_gpio {
+        compatible = "gpio-keys";
+
+        task1_led: task1_led {
+            gpios = <&gpio0 16 GPIO_ACTIVE_HIGH>;
+            label = "Task 1 LED";
+        };
+        task2_led: task2_led {
+            gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
+            label = "Task 2 LED";
+        };
+        task3_led: task3_led {
+            gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
+            label = "Task 3 LED";
+        };
+    };
+
+    /* TODO (Part b): Configure a button input on PIN 15 */
+    buttons {
+        compatible = "gpio-keys";
+        button: button {
+            gpios = <&gpio0 15 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            label = "User Button";
+        };
+    };
+
+    chosen {
+        task1_led = &task1_led;
+        task2_led = &task2_led;
+        task3_led = &task3_led;
+	zephyr,display = &ssd1306_ssd1306_128x64;
+    };
+};
+
+/* TODO: Configure I2C for the SSD1306 display.
+* You can reuse your solution from the previous exercise. */
+&i2c0 {
+    status = "okay";
+
+    ssd1306_ssd1306_128x64: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <64>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <63>;
+        segment-remap;
+        com-invdir;
+        prechargep = <0x22>;
+    };
+};
